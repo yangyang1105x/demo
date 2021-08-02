@@ -17,9 +17,9 @@ function output = roi(image, mask)
         roi_values = slice(roi_slice);
         slice_max(i)=max(roi_values);
     end
-    output.slice_max = slice_max;
+    output.slice_max = slice_max; % only need output. if want to output as structure
     % calculate the mean of the max values
-    output.slices_mean=mean(slice_max); 
+    output.slices_mean=mean(slice_max); % only need output. if want to output as structure
     
 end
 
