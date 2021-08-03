@@ -27,11 +27,6 @@ for region = 1:length(regions)
         end
     end
 
-
-    %pet = niftiread(path_data + "pet3d_resampled.nii");
-    %ct = niftiread(path_data + "CTWHOLEBODY_H_1001.nii");
-    %segment = niftiread(path_data + "DesAorta.nii");
-
     % view images
     %figure(1), imshowpair(petct(:,:,244,2), segment(:,:,244), "blend") %[-1200,800]);
     %figure(2), imshowpair(petct(:,:,244,1), segment(:,:,244), "blend") %[-1200,800]);
@@ -43,9 +38,10 @@ for region = 1:length(regions)
     pet_values = roi(petct(:,:,:,2), mask);
     ct_values = roi(petct(:,:,:,1), mask);
 
-    pet = struct2cell(pet_values);
-    ct = struct2cell(ct_values);
-    output = [pet.', ct.'];
+    pet = struct2cell(pet_values).';
+    pet = [char(patientname), voi, pet];
+    ct = struct2cell(ct_values).';
+    output = [pet, ct];
 
     writecell(output, path + 'PatientData.xlsx', 'WriteMode', 'append')
 end
